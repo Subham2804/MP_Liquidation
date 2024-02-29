@@ -1,0 +1,17 @@
+[package]
+name = "mp_liquidation"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+serde_json = "1.0.79"
+base64 = "0.21.6"
+anyhow = "1.0"
+async-trait = "0.1.50" # If you're using async traits
+cosmwasm-std = { version = "0.14" }
+
