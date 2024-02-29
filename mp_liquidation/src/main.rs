@@ -1,6 +1,5 @@
 mod constants;
 use anyhow::Error;
-use async_trait::async_trait;
 use base64;
 use cosmwasm_std::{Coin, Decimal, Uint128};
 use reqwest;
@@ -75,28 +74,24 @@ fn get_token_value(collateral: Coin, token_decimals: u128) -> Result<u128, Error
 #[tokio::main]
 async fn main() {
 
-    // For example, to run every 60 seconds, set it to 60.
-    const DURATION: u64 = 10;
-
-    let mut interval = interval(Duration::from_secs(DURATION));
+    let mut interval = interval(Duration::from_secs(constants::DURATION));
 
     loop {
         interval.tick().await;
 
-
-    // Define the user address as a constant string to avoid repetition.
+    // Define the user address as a constant string.
     let user_address = "osmo1p2lnskywgtmdszw4lyka8wu3mn925365djuc24".to_string();
 
     // Perform a single asynchronous call to fetch the user's financials (debts and collaterals).
     match get_user_financials(user_address).await {
         Ok((debts, collaterals)) => {
+            
             // TASK 1: Output the user's debts and collaterals.
             println!("Debts: {:?}", debts);
             println!("Collaterals: {:?}", collaterals);
 
             // TASK 2: Calculate and output the collateralization ratio.
-            // Since we already have the debts and collaterals, we can directly pass them to
-            // the function without making another call to `get_user_financials`.
+
             match calculate_collateralization_ratio(debts, collaterals) {
                 Ok(collateralization_ratio) => {
                     println!("Collateralization ratio: {}", collateralization_ratio);
