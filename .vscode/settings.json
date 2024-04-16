@@ -1,0 +1,5 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./mp_liquidation/Cargo.toml"
+    ]
+}
